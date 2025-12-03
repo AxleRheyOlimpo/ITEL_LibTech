@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibTech | Book Return</title>
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/CSS/BookReturn.css">
+</head>
+<body class="BookReturn flex flex-col min-h-screen text-slate-800">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="IMAGES/BGBGBG.png" alt="LibTech Logo" loading="lazy">
+      <div class="logo-text">
+        <h1>LibTech</h1>
+      </div>
+    </div>
+
+    <nav class="BookReturn-nav">
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="BookEntry.html" class="nav-btn">BOOK ENTRY</a>
+      <a href="Issuance.html" class="nav-btn">ISSUANCE</a>
+      <a href="#" class="nav-btn active">BOOK RETURN</a>
+    </nav>
+  </header>
+
+  <hr id="thckoutline">
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl mx-auto w-full px-6 py-8">
+
+    <div class="mb-6 flex items-center gap-3">
+      <i class="fa-solid fa-rotate-left text-2xl text-[#1a365d]"></i>
+      <h1 class="text-2xl font-bold text-[#1a365d]">Book Return</h1>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 min-h-[600px]">
+
+      <div class="mb-6">
+        <div class="relative max-w-sm">
+          <input type="text" id="searchInput"
+            class="w-full border border-gray-300 rounded px-4 py-2 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#2b6cb0] focus:ring-1 focus:ring-[#2b6cb0] transition-all"
+            placeholder="Search Student or Book Title...">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-100 text-sm">
+              <th class="py-3 px-4 font-bold text-gray-700">Student Name</th>
+              <th class="py-3 px-4 font-bold text-gray-700">Book Title</th>
+              <th class="py-3 px-4 font-bold text-gray-700 w-32">Due Date</th>
+              <th class="py-3 px-4 font-bold text-gray-700 w-32">Status</th>
+              <th class="py-3 px-4 font-bold text-gray-700 w-24 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="transactionBody" class="text-sm text-gray-600"></tbody>
+        </table>
+
+        <div id="emptyState" class="hidden text-center py-12 text-gray-400">
+          <i class="fa-solid fa-magnifying-glass text-3xl mb-2"></i>
+          <p>No matching records found.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      © 2025 LibTech | All Rights Reserved
+    </div>
+
+    <div class="footer-links">
+      <a href="BookEntry.html">Discover</a>
+      <a href="AboutUs.html">About Us</a>
+      <a href="Dashboard.html">Account</a>
+    </div>
+
+    <div class="socials">
+      <a href="#" target="_blank" class="social-btn facebook" aria-label="Facebook">
+        <img src="IMAGES/FB logo.png" alt="Facebook Logo">
+      </a>
+      <a href="#" target="_blank" class="social-btn google" aria-label="Google">
+        <img src="IMAGES/IG logo.png" alt="Google Logo">
+      </a>
+      <a href="#" target="_blank" class="social-btn twitter" aria-label="Twitter">
+        <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
+      </a>
+    </div>
+  </footer>
+
+  
+  <script src="Dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibTech | Book Entry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/BookEntry.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="dashboard-page">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="IMAGES/BGBGBG.png" alt="LibTech Logo" loading="lazy">
+      <div class="logo-text">
+        <h1>LibTech</h1>
+      </div>
+    </div>
+
+    <nav class="dashboard-nav">
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="#" class="nav-btn active">BOOK ENTRY</a>
+      <a href="Issuance.html" class="nav-btn">ISSUANCE</a>
+      <a href="BookReturn.html" class="nav-btn">BOOK RETURN</a>
+    </nav>  
+
+    <div class="user-profile" onclick="toggleDropdown()">
+      <div class="user-avatar" id="userAvatar">J</div>
+      <div class="user-info">
+        <span class="user-greeting">Welcome back,</span>
+        <span class="user-name" id="userName">John Doe</span>
+      </div>
+      
+      <!-- Dropdown Menu -->
+      <div class="user-dropdown" id="userDropdown">
+        <a href="#" class="dropdown-item">My Profile</a>
+        <a href="#" class="dropdown-item">Settings</a>
+        <a href="#" class="dropdown-item">Help</a>
+        <a href="LoginPage.html" class="dropdown-item logout">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <hr id="thckoutline">
+
+  <!-- Available Books Section -->
+  <section class="available-section" id="available-books">
+    <div class="catalog-header">
+      <h3>AVAILABLE BOOKS</h3>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by title or author...">
+        <button>🔍</button>
+      </div>
+    </div>
+
+    <div class="book-grid" id="bookGrid">
+
+      <!-- Book 1 -->
+      <div class="book book-card">
+        <img src="IMAGES/Neural Orchard.png" alt="Neural Orchard book cover">
+        <div class="book-info">
+          <h4>Neural Orchard</h4>
+          <p class="author">by John Doe</p>
+          <p class="rating">★★★★☆</p>
+          <p class="description">A captivating story exploring AI and human creativity.</p>
+          <a href="Issuance.html?book=Neural%20Orchard" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 2 -->
+      <div class="book book-card">
+        <img src="IMAGES/Synthetic Shadows.png" alt="Synthetic Shadows book cover">
+        <div class="book-info">
+          <h4>Synthetic Shadows</h4>
+          <p class="author">by Jane Smith</p>
+          <p class="rating">★★★☆☆</p>
+          <p class="description">A thrilling journey into the future of robotics.</p>
+          <a href="Issuance.html?book=Synthetic%20Shadows" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 3 -->
+      <div class="book book-card">
+        <img src="IMAGES/Data Corruption.jpg" alt="Data Corruption book cover">
+        <div class="book-info">
+          <h4>Data Corruption</h4>
+          <p class="author">by Alex Turner</p>
+          <p class="rating">★★★★☆</p>
+          <p class="description">Insights into cybersecurity and digital vulnerabilities.</p>
+          <a href="Issuance.html?book=Data%20Corruption" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 4 -->
+      <div class="book book-card">
+        <img src="IMAGES/Cosmic Code.png" alt="Cosmic Code book cover">
+        <div class="book-info">
+          <h4>Cosmic Code</h4>
+          <p class="author">by Emily Rose</p>
+          <p class="rating">★★★★★</p>
+          <p class="description">A science fiction adventure through space and technology.</p>
+          <a href="Issuance.html?book=Cosmic%20Code" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 5 -->
+      <div class="book book-card">
+        <img src="IMAGES/The nature of technology.png" alt="The Nature of Technology book cover">
+        <div class="book-info">
+          <h4>The Nature of Technology</h4>
+          <p class="author">by Michael Brown</p>
+          <p class="rating">★★★☆☆</p>
+          <p class="description">Exploring how technology shapes human life and society.</p>
+          <a href="Issuance.html?book=The%20Nature%20of%20Technology" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 6 -->
+      <div class="book book-card">
+        <img src="IMAGES/thirst.png" alt="Thirst book cover">
+        <div class="book-info">
+          <h4>Thirst</h4>
+          <p class="author">by Sarah Lee</p>
+          <p class="rating">★★★★☆</p>
+          <p class="description">An intense story of survival and human determination.</p>
+          <a href="Issuance.html?book=Thirst" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 7 -->
+      <div class="book book-card">
+        <img src="IMAGES/alice_s adventure.png" alt="Alice's Adventure book cover">
+        <div class="book-info">
+          <h4>Alice's Adventure</h4>
+          <p class="author">by Lewis Carroll</p>
+          <p class="rating">★★★★★</p>
+          <p class="description">A classic tale of wonder and curiosity.</p>
+          <a href="Issuance.html?book=Alice%27s%20Adventure" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Book 8 -->
+      <div class="book book-card">
+        <img src="IMAGES/fairy tales.png" alt="Fairy Tales book cover">
+        <div class="book-info">
+          <h4>Fairy Tales</h4>
+          <p class="author">by Various Authors</p>
+          <p class="rating">★★★★☆</p>
+          <p class="description">Magical stories to spark imagination for all ages.</p>
+          <a href="Issuance.html?book=Fairy%20Tales" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-left">
+      © 2025 LibTech | All Rights Reserved
+    </div>
+
+    <div class="footer-links">
+      <a href="BookEntry.html">Discover</a>
+      <a href="AboutUs.html">About Us</a>
+      <a href="Dashboard.html">Account</a>
+    </div>
+
+    <div class="socials">
+      <a href="#" target="_blank" class="social-btn facebook" aria-label="Facebook">
+        <img src="IMAGES/FB logo.png" alt="Facebook Logo">
+      </a>
+      <a href="#" target="_blank" class="social-btn google" aria-label="Google">
+        <img src="IMAGES/IG logo.png" alt="Google Logo">
+      </a>
+      <a href="#" target="_blank" class="social-btn twitter" aria-label="Twitter">
+        <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
+      </a>
+    </div>
+  </footer>
+
+  <script src="JS/BookEntry.js"></script>
+</body>
+</html>

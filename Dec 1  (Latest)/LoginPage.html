@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login/Register</title>
+  <link rel="stylesheet" href="CSS/LoginPage.css">
+</head>
+<body>
+  
+  <a href="home.html" class="return-home-btn">← Home</a>
+
+  <div class="container">
+    <input type="radio" name="tab" id="login" checked>
+    <input type="radio" name="tab" id="register">
+    
+    <div class="tabs">
+      <label for="login" class="tab">Login</label>
+      <label for="register" class="tab">Register</label>
+    </div>
+
+    <div class="form-container">
+      <form id="login-form" action="home.html" method="get">
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+
+        <div class="options">
+          <label><input type="checkbox"> Remember me</label>
+        </div>
+
+        <button type="submit">Login</button>
+        <a href="forgetpass.html" class="forgot">Forget Your Password?</a>
+      </form>
+
+      <form id="register-form" action="LoginPage.html" method="get">
+        <input type="text" placeholder="Username" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <input type="password" placeholder="Confirm Password" required>
+        <button id="submitBtn" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
