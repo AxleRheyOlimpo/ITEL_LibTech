@@ -1,0 +1,49 @@
+<?php
+require_once 'includes/auth.php';
+checkRememberMe(); // Auto-login if remember me token exists
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="CSS/forgetpass.css">
+<title>Password Reset UI</title>
+</head>
+<body>
+
+<div class="card" id="forgotCard">
+    <div class="icon-circle">
+        🔒
+    </div>
+    <h3>Forget Password?</h3>
+    <p>No worries, we'll send you reset instructions</p>
+
+    <label style="float:left;font-size:14px;margin-top:20px;">Email:</label>
+    <input type="email" id="emailInput" placeholder="Enter your email address">
+
+    <button onclick="sendEmail()">Reset Password</button>
+
+    <a class="link" href="LoginPage.php">← Back to login</a>
+</div>
+
+<div class="card" id="emailCard" style="display:none;">
+    <div class="icon-circle" style="background:#e6ffe6;">
+        ✅ 
+    </div>
+    <h3>Check Your Email</h3>
+    <p>We've sent a password reset link to your email address</p>
+
+    <div class="secondary-box">
+        Didn't receive the email? Check your spam folder.
+        <button class="secondary-button" onclick="resendEmail()">Resend Email</button>
+    </div>
+
+    <a class="link" href="LoginPage.php">← Back to login</a>
+</div>
+
+<script src="JS/forgetpass.js"></script>
+
+</body>
+</html>

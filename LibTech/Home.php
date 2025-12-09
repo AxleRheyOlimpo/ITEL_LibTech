@@ -1,0 +1,380 @@
+<?php
+require_once 'includes/auth.php';
+checkRememberMe();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibTech | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/Homepage.css">
+</head>
+
+<script>
+  const userData = {
+    fullName: "John Doe",
+    firstName: "John"
+  };
+
+    // Set user information on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('userName').textContent = userData.fullName;
+    document.getElementById('welcomeName').textContent = userData.firstName;
+    document.getElementById('userAvatar').textContent = userData.firstName.charAt(0).toUpperCase();
+  });
+
+  // Toggle dropdown menu
+  function toggleDropdown() {
+    const dropdown = document.getElementById('userDropdown');
+    dropdown.classList.toggle('show');
+  }
+
+    // Close dropdown when clicking outside
+  document.addEventListener('click', (event) => {
+    const userProfile = document.querySelector('.user-profile');
+    const dropdown = document.getElementById('userDropdown');
+      
+    if (!userProfile.contains(event.target)) {
+      dropdown.classList.remove('show');
+    }
+});
+
+    
+  document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.slider-track');
+  if (!track) {
+    console.error('Slider: .slider-track not found — make sure the section markup is present.');
+    return;
+  }
+
+  const slides = Array.from(track.querySelectorAll('.slide'));
+  if (slides.length === 0) {
+    console.error('Slider: No .slide elements found inside .slider-track.');
+    return;
+  }
+
+  const dotsContainer = document.querySelector('.slider-dots');
+  if (!dotsContainer) {
+    console.error('Slider: .slider-dots container not found.');
+    return;
+  }
+
+  let index = 0;
+  let autoSlideInterval = null;
+  const AUTO_MS = 4000;
+  let isPaused = false;
+
+  // create dots
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    btn.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    btn.addEventListener('click', () => {
+      index = i;
+      update();
+      restartAuto();
+    });
+    dotsContainer.appendChild(btn);
+  });
+
+  const dots = Array.from(dotsContainer.querySelectorAll('button'));
+
+  function update() {
+    // move track
+    track.style.transform = `translateX(${-index * 100}%)`;
+
+    // update dots aria-pressed
+    dots.forEach((d, i) => d.setAttribute('aria-pressed', i === index ? 'true' : 'false'));
+  }
+
+  function next() {
+    index = (index + 1) % slides.length;
+    update();
+  }
+
+  function startAuto() {
+    if (autoSlideInterval) return;
+    autoSlideInterval = setInterval(next, AUTO_MS);
+  }
+
+  function stopAuto() {
+    if (!autoSlideInterval) return;
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = null;
+  }
+
+  function restartAuto() {
+    stopAuto();
+    startAuto();
+  }
+
+  // hover pause
+  const container = document.querySelector('.slider-container');
+  container.addEventListener('mouseenter', () => {
+    isPaused = true; stopAuto();
+  });
+  container.addEventListener('mouseleave', () => {
+    isPaused = false; startAuto();
+  });
+
+  // Pause when not visible (saves CPU)
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) { stopAuto(); }
+      else if (!isPaused) { startAuto(); }
+    });
+  }, { threshold: 0.25 });
+  observer.observe(container);
+
+  // touch swipe support (mobile)
+  (function addTouch() {
+    let startX = 0;
+    let deltaX = 0;
+    const threshold = 40;
+
+    container.addEventListener('touchstart', e => {
+      stopAuto();
+      startX = e.touches[0].clientX;
+      deltaX = 0;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', e => {
+      deltaX = e.touches[0].clientX - startX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX < 0) index = (index + 1) % slides.length;
+        else index = (index - 1 + slides.length) % slides.length;
+        update();
+      }
+      restartAuto();
+    });
+  })();
+
+  // keyboard accessibility: left/right arrows when focus inside
+  container.setAttribute('tabindex','0');
+  container.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { next(); restartAuto(); }
+    if (e.key === 'ArrowLeft') { index = (index - 1 + slides.length) % slides.length; update(); restartAuto(); }
+  });
+
+  // start
+  update();
+  startAuto();
+});
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  const track = document.querySelector(".slider-track");
+
+  function updateDepth() {
+    slides.forEach(slide => slide.classList.remove("active", "left", "right"));
+
+    const index = Math.abs(
+      Math.round(
+        track.style.transform.replace("translateX(", "").replace("%)", "") / 100
+      )
+    );
+
+    slides[index]?.classList.add("active");
+    slides[index - 1]?.classList.add("left");
+    slides[index + 1]?.classList.add("right");
+  }
+
+  const observer = new MutationObserver(updateDepth);
+  observer.observe(track, { attributes: true, attributeFilter: ["style"] });
+
+  updateDepth();
+});
+</script>
+
+
+
+<body>
+
+  <!-- =============Header================= -->
+<header>
+    <?php if (isLoggedIn()): 
+      $user = getCurrentUser();
+    ?>
+      <!-- Logged in header with user profile -->
+      <div class="user-profile" onclick="toggleDropdown()">
+        <div class="user-avatar" id="userAvatar"><?php echo strtoupper(substr($user['first_name'], 0, 1)); ?></div>
+        <div class="user-info">
+          <span class="user-greeting">Welcome back,</span>
+          <span class="user-name"><?php echo htmlspecialchars($user['username']); ?></span>
+        </div>
+          
+        <div class="user-dropdown" id="userDropdown">
+          <a href="pages/profile.php" class="dropdown-item">My Profile</a>
+          <a href="pages/settings.php" class="dropdown-item">Settings</a>
+          <a href="pages/help.php" class="dropdown-item">Help</a>
+          <a href="api/logout.php" class="dropdown-item logout">Logout</a>
+        </div>
+      </div>
+    <?php else: ?>
+      <!-- Not logged in - show login/signup -->
+      <div class="auth-buttons">
+        <a href="LoginPage.php" class="login-btn">Login</a>
+        <a href="LoginPage.php" class="signup-btn">Sign Up</a>
+      </div>
+    <?php endif; ?>
+</header>
+
+
+  <hr id="thckoutline">
+
+  <!-- =============Hero Section======================== -->
+ <section class="hero">
+  <div class="hero-text">
+    <h2>LibTech</h2>
+    <p>
+      LibTech is a modern library system designed to simplify book tracking and borrower management.
+      Experience the power of technology through a system that keeps libraries smart, secure, and efficient — anywhere, anytime.
+    </p>
+    <div class="hero-buttons">
+      <a href="#featured-books" class="btn-primary">Explore Now</a>
+      <a href="AboutUs.php" class="btn-secondary">About Us</a>
+    </div>
+  </div>
+  <img src="IMAGES/BGBG.png" alt="Library Illustration" loading="lazy">
+</section>
+
+  <hr id="thckoutline-2"> 
+
+<!-- ===============Dashboard Metrics=================== -->
+<section class="dashboard-metrics">
+  <div class="metrics-container">
+    
+    <div class="metrics-header">
+      <h3>Dashboard</h3>
+      <p>Your own metrics are shown below.</p>
+    </div>
+
+    <div class="metrics-grid">
+      
+      <div class="metric-card">
+        <div class="metric-icon">📚</div>
+        <div class="metric-value" data-metric="available-books">0</div>
+        <div class="metric-label">Available Books</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">📖</div>
+        <div class="metric-value" data-metric="checked-out">0</div>
+        <div class="metric-label">Books Checked Out</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">✓</div>
+        <div class="metric-value" data-metric="returned">0</div>
+        <div class="metric-label">Books Returned</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+  <hr id="thckoutline-2"> 
+
+  <!-- ===============Featured Books=================== -->
+<section class="featured-section" id="featured-books">
+  <h3>FEATURED BOOKS</h3>
+  <p class="featured-description">
+    Discover our highlighted book selections—automatically showcased for you in a smooth, modern slideshow.
+  </p>
+
+  <div class="slider-container" aria-roledescription="carousel">
+    <div class="slider-track">
+
+      <!-- Slide 1 -->
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+        <img src="IMAGES/Neural Orchard.png" alt="Neural Orchard">
+        <div class="slide-info">
+          <h4>Neural Orchard</h4>
+          <p>by John Doe</p>
+            <a href="Issuance.php" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+        <img src="IMAGES/Synthetic Shadows.png" alt="Synthetic Shadows">
+        <div class="slide-info">
+          <h4>Synthetic Shadows</h4>
+          <p>by Jane Smith</p>
+            <a href="Issuance.php" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+        <img src="IMAGES/Data Corruption.jpg" alt="Data Corruption">
+        <div class="slide-info">
+          <h4>Data Corruption</h4>
+          <p>by Alex Turner</p>
+            <a href="Issuance.php" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+        <img src="IMAGES/Cosmic Code.png" alt="Cosmic Code">
+        <div class="slide-info">
+          <h4>Cosmic Code</h4>
+          <p>by Emily Rose</p>
+            <a href="Issuance.php" class="borrow-btn">Borrow</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dots + optional nav -->
+    <div class="slider-controls">
+      <div class="slider-dots" aria-hidden="false"></div>
+    </div>
+  </div>
+
+  <div class="view-all-container">
+    <a href="BookEntry.php" class="btn-primary view-all-btn">View All Books →</a>
+  </div>
+</section>
+
+
+
+  <!-- ===============Footer=============== -->
+  <footer>
+    <div class="footer-left">
+      © 2025 LibTech | All Rights Reserved
+    </div>
+
+    <div class="footer-links">
+      <a href="BookEntry.php">Discover</a>
+      <a href="AboutUs.php">About Us</a>
+      <a href="Dashboard.php">Account</a>
+    </div>
+
+    <div class="socials">
+      <a href="https://www.facebook.com/profile.php?id=61584802821604&_rdc=1&_rdr#" target="_blank" class="social-btn facebook" aria-label="Facebook">
+        <img src="IMAGES/FB logo.png" alt="Facebook Logo">
+      </a>
+      <a href="https://www.instagram.com/libtech2025?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn google" aria-label="Google">
+        <img src="IMAGES/IG logo.png" alt="Google Logo">
+      </a>
+      <a href="https://youtu.be/dQw4w9WgXcQ?si=UZ_sGkBnUkLYToFJ" target="_blank" class="social-btn twitter" aria-label="Twitter">
+        <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
+      </a>
+    </div>
+  </footer>
+
+<script src="JS/dashboard-sync.js"></script>
+
+</body>
+</html>
