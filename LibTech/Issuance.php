@@ -8,17 +8,15 @@ checkRememberMe(); // Auto-login if remember me token exists
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibTech - Book Issuance</title>
+    <title>LibTech | Book Issuance</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Your Dashboard Page CSS -->
     <link rel="stylesheet" href="CSS/Issuance.css">
 
     <style>
-        /* Ensure Poppins is applied globally */
         body, h1, h2, h3, h4, h5, h6, input, button, select, textarea {
             font-family: 'Poppins', sans-serif;
         }
@@ -27,38 +25,10 @@ checkRememberMe(); // Auto-login if remember me token exists
 
 <body class="dashboard-page flex flex-col min-h-screen text-slate-800">
 
-    <!-- =================== HEADER =================== -->
-    <header>
-    <?php if (isLoggedIn()): 
-      $user = getCurrentUser();
-    ?>
-      <!-- Logged in header with user profile -->
-      <div class="user-profile" onclick="toggleDropdown()">
-        <div class="user-avatar" id="userAvatar"><?php echo strtoupper(substr($user['first_name'], 0, 1)); ?></div>
-        <div class="user-info">
-          <span class="user-greeting">Welcome back,</span>
-          <span class="user-name"><?php echo htmlspecialchars($user['username']); ?></span>
-        </div>
-          
-        <div class="user-dropdown" id="userDropdown">
-          <a href="pages/profile.php" class="dropdown-item">My Profile</a>
-          <a href="pages/settings.php" class="dropdown-item">Settings</a>
-          <a href="pages/help.php" class="dropdown-item">Help</a>
-          <a href="api/logout.php" class="dropdown-item logout">Logout</a>
-        </div>
-      </div>
-    <?php else: ?>
-      <!-- Not logged in - show login/signup -->
-      <div class="auth-buttons">
-        <a href="LoginPage.php" class="login-btn">Login</a>
-        <a href="LoginPage.php" class="signup-btn">Sign Up</a>
-      </div>
-    <?php endif; ?>
-  </header>
+    <?php include 'includes/header.php'; ?>
 
     <hr id="thckoutline">
 
-    <!-- =================== MAIN CONTENT =================== -->
     <main class="flex-grow max-w-7xl mx-auto w-full px-6 py-8">
         <div class="mb-8 flex items-center gap-3">
             <i class="fa-solid fa-calendar-check text-3xl text-[#1a365d]"></i>
@@ -158,28 +128,15 @@ checkRememberMe(); // Auto-login if remember me token exists
         </div>
     </main>
 
-    <!-- =================== FOOTER =================== -->
-    <footer>
-    <div class="footer-left">
-      © 2025 LibTech | All Rights Reserved
-    </div>
-
-    <div class="footer-links">
-      <a href="BookEntry.php">Discover</a>
-      <a href="AboutUs.php">About Us</a>
-      <a href="Dashboard.php">Account</a>
-    </div>
-
-    <div class="socials">
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=UZ_sGkBnUkLYToFJ" target="_blank" class="social-btn facebook" aria-label="Facebook">
-        <img src="IMAGES/FB logo.png" alt="Facebook Logo">
-      </a>
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=UZ_sGkBnUkLYToFJ" target="_blank" class="social-btn google" aria-label="Google">
-        <img src="IMAGES/IG logo.png" alt="Google Logo">
-      </a>
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=UZ_sGkBnUkLYToFJ" target="_blank" class="social-btn twitter" aria-label="Twitter">
-        <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
-      </a>
+    <!-- Footer -->
+  <footer class="bg-[#1f5c70] text-white py-8 px-20">
+    <div class="flex justify-between items-center flex-wrap gap-4">
+      <div>© 2025 LibTech | All Rights Reserved</div>
+      <div class="flex gap-4">
+        <a href="DiscoverBooks.php" class="hover:underline">Discover</a>
+        <a href="AboutUs.php" class="hover:underline">About Us</a>
+        <a href="Dashboard.php" class="hover:underline">Account</a>
+      </div>
     </div>
   </footer>
 

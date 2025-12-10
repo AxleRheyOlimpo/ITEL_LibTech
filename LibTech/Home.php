@@ -199,33 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <body>
 
   <!-- =============Header================= -->
-<header>
-    <?php if (isLoggedIn()): 
-      $user = getCurrentUser();
-    ?>
-      <!-- Logged in header with user profile -->
-      <div class="user-profile" onclick="toggleDropdown()">
-        <div class="user-avatar" id="userAvatar"><?php echo strtoupper(substr($user['first_name'], 0, 1)); ?></div>
-        <div class="user-info">
-          <span class="user-greeting">Welcome back,</span>
-          <span class="user-name"><?php echo htmlspecialchars($user['username']); ?></span>
-        </div>
-          
-        <div class="user-dropdown" id="userDropdown">
-          <a href="pages/profile.php" class="dropdown-item">My Profile</a>
-          <a href="pages/settings.php" class="dropdown-item">Settings</a>
-          <a href="pages/help.php" class="dropdown-item">Help</a>
-          <a href="api/logout.php" class="dropdown-item logout">Logout</a>
-        </div>
-      </div>
-    <?php else: ?>
-      <!-- Not logged in - show login/signup -->
-      <div class="auth-buttons">
-        <a href="LoginPage.php" class="login-btn">Login</a>
-        <a href="LoginPage.php" class="signup-btn">Sign Up</a>
-      </div>
-    <?php endif; ?>
-</header>
+  <?php include 'includes/header.php'; ?>
 
 
   <hr id="thckoutline">
@@ -356,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <div class="footer-links">
-      <a href="BookEntry.php">Discover</a>
+      <a href="DiscoverBooks.php">Discover</a>
       <a href="AboutUs.php">About Us</a>
       <a href="Dashboard.php">Account</a>
     </div>
@@ -368,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <a href="https://www.instagram.com/libtech2025?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn google" aria-label="Google">
         <img src="IMAGES/IG logo.png" alt="Google Logo">
       </a>
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=UZ_sGkBnUkLYToFJ" target="_blank" class="social-btn twitter" aria-label="Twitter">
+      <a href="https://www.x.com" target="_blank" class="social-btn twitter" aria-label="Twitter">
         <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
       </a>
     </div>

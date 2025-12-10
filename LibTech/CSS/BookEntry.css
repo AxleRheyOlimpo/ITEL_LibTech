@@ -1,6 +1,4 @@
-/* ==========================
-   General Reset & Body
-========================== */
+/* General Reset & Body */
 * {
   margin: 0;
   padding: 0;
@@ -13,9 +11,7 @@ body.dashboard-page {
   color: #333;
 }
 
-/* ==========================
-   Header
-========================== */
+/* Header */
 header {
   display: flex;
   justify-content: space-between;

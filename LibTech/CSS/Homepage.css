@@ -1,6 +1,4 @@
-/* ==========================
-   General Styles
-========================== */
+/* General Styles */
 * {
   margin: 0;
   padding: 0;
@@ -17,9 +15,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ==========================
-   Header
-========================== */
+/* Header */
 header {
   display: flex;
   justify-content: space-between;

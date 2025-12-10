@@ -22,31 +22,7 @@ $firstName = $user['first_name'];
 <body>
 
   <!-- Header -->
-  <header>
-    <?php if (isLoggedIn()): ?>
-      <!-- Logged in header with user profile -->
-      <div class="user-profile" onclick="toggleDropdown()">
-        <div class="user-avatar" id="userAvatar"><?php echo strtoupper(substr($firstName, 0, 1)); ?></div>
-        <div class="user-info">
-          <span class="user-greeting">Welcome back,</span>
-          <span class="user-name"><?php echo htmlspecialchars($username); ?></span>
-        </div>
-          
-        <div class="user-dropdown" id="userDropdown">
-          <a href="pages/profile.php" class="dropdown-item">My Profile</a>
-          <a href="pages/settings.php" class="dropdown-item">Settings</a>
-          <a href="pages/help.php" class="dropdown-item">Help</a>
-          <a href="api/logout.php" class="dropdown-item logout">Logout</a>
-        </div>
-      </div>
-    <?php else: ?>
-      <!-- Not logged in - show login/signup -->
-      <div class="auth-buttons">
-        <a href="LoginPage.php" class="login-btn">Login</a>
-        <a href="LoginPage.php" class="signup-btn">Sign Up</a>
-      </div>
-    <?php endif; ?>
-  </header>
+  <?php include 'includes/header.php'; ?>
 
   <hr id="thckoutline">
 
@@ -101,13 +77,13 @@ $firstName = $user['first_name'];
     </div>
 
     <div class="socials">
-      <a href="#" target="_blank" class="social-btn facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/profile.php?id=61584802821604&_rdc=1&_rdr#" target="_blank" class="social-btn facebook" aria-label="Facebook">
         <img src="IMAGES/FB logo.png" alt="Facebook Logo">
       </a>
-      <a href="#" target="_blank" class="social-btn google" aria-label="Instagram">
+      <a href="https://www.instagram.com/libtech2025?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn google" aria-label="Instagram">
         <img src="IMAGES/IG logo.png" alt="Instagram Logo">
       </a>
-      <a href="#" target="_blank" class="social-btn twitter" aria-label="Twitter">
+      <a href="https://www.x.com" target="_blank" class="social-btn twitter" aria-label="Twitter">
         <img src="IMAGES/X or twitter logo.png" alt="Twitter Logo">
       </a>
     </div>
